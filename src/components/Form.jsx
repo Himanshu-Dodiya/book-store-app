@@ -2,22 +2,47 @@ import { Typography, TextField, Button, FormHelperText } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import authService from "../services/authService";
+import {toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
 const Form1 = () => {
-  // const [username,setUserName] = useState("");
-  // const [password,setPassword] = useState("");
-
   const [userdetails, setUserDetails] = useState({
     username: "",
     password: "",
   });
+  const [userData,setUserData]=useState();
+  // const getData = async () => {
+  //   await axios.get(`http://localhost:5000/api/user/byId?id=${2089}`).then((response) => 
+  //     setUserData(response.data)
+  //   );
+  // };
   // useEffect(() => {
-  //   if (userdetails.username.length > 5) {
-  //     console.log("username is valid");
-  //   }
-  // }, [userdetails.username]);
-  const handleSubmit = () => {
+  //   getData();
+  // }, []);
+  console.log("userData :", userData);
+  const handleSubmit = async (values) => {
     console.log("username :", userdetails.username);
     console.log("password :", userdetails.password);
+    const payload = {
+      firstName: values.username,
+      lastName: "test",
+      email: values.email,
+      roleId: 2,
+      password: values.password,
+    };
+
+    await authService
+      .Register(payload)
+      .then((response) => {
+        if (response.data.code === 200) {
+          toast.success("Registered Successfully");
+          console.log("After toast success");
+        }
+      })
+      .catch((error) => {
+        toast.error("Unable to Register Try Again!!");
+      });
   };
 
   const validationSchema = Yup.object().shape({
@@ -30,12 +55,9 @@ const Form1 = () => {
     <Formik
       initialValues={{ username: "", age: "", email: "", password: "" }}
       validationSchema={validationSchema}
-      onSubmit={(values) => {
-        handleSubmit();
-      }}
+      onSubmit={(values) => handleSubmit(values)}
     >
-      {({ values, errors, setFieldValue,handleBlur }) => {
-        console.log("error : ", errors);
+      {({ values, errors, setFieldValue, handleBlur }) => {
         return (
           <Form>
             <div className="form-demo">
@@ -59,11 +81,13 @@ const Form1 = () => {
                 value={values.age}
                 error={errors.age}
                 onChange={(e) => setFieldValue("age", e.target.value)}
-                    OnBlur={handleBlur}
+                onBlur={handleBlur}
               />
-                   
+
               <FormHelperText error>
-                <ErrorMessage name="age">Username should not be empty</ErrorMessage>
+                <ErrorMessage name="age">
+                  Username should not be empty
+                </ErrorMessage>
               </FormHelperText>
               <TextField
                 label="email"
@@ -72,11 +96,13 @@ const Form1 = () => {
                 value={values.email}
                 error={errors.email}
                 onChange={(e) => setFieldValue("email", e.target.value)}
-                OnBlur={handleBlur}
+                onBlur={handleBlur}
               />
-                    
+
               <FormHelperText error>
-                <ErrorMessage name="email">Username should not be empty</ErrorMessage>
+                <ErrorMessage name="email">
+                  Username should not be empty
+                </ErrorMessage>
               </FormHelperText>
               <TextField
                 label="Password"
@@ -85,13 +111,17 @@ const Form1 = () => {
                 value={values.password}
                 error={errors.password}
                 onChange={(e) => setFieldValue("password", e.target.value)}
-                OnBlur={handleBlur}
+                onBlur={handleBlur}
               />
-                
+
               <FormHelperText error>
-                <ErrorMessage name="password">Username should not be empty</ErrorMessage>
+                <ErrorMessage name="password">
+                  Username should not be empty
+                </ErrorMessage>
               </FormHelperText>
-              <Button variant="contained">Submit</Button>
+              <Button variant="contained" type="submit">
+                Submit
+              </Button>
             </div>
           </Form>
         );
