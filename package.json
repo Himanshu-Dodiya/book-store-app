@@ -1,24 +1,32 @@
 {
-  "name": "book-store-app",
+  "name": "book_store",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@emotion/react": "^11.11.1",
+     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.14.3",
-    "@testing-library/jest-dom": "^5.17.0",
+    "@fontsource/roboto": "^5.0.1",
+    "@mui/icons-material": "^5.11.16",
+    "@mui/material": "^5.13.3",
+    "@reduxjs/toolkit": "^1.9.5",
+    "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
-    "formik": "^2.4.3",
+    "for": "^0.0.1-dev.0",
+    "formik": "^2.2.9",
+    "install": "^0.13.0",
+    "modules": "^0.4.0",
+    "node": "^20.2.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.14.2",
-    "react-scripts": "5.0.1",
+    "react-icons": "^4.8.0",
+    "react-redux": "^8.0.7",
+    "react-router-dom": "^6.11.2",
+    "react-scripts": "^5.0.1",
     "react-toastify": "^9.1.3",
     "web-vitals": "^2.1.4",
-    "yup": "^1.2.0"
+    "yup": "^1.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -43,5 +51,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.2"
   }
 }
